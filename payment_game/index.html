@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>支払いゲーム</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- メインコンテンツ -->
+    <main id="main-wrapper">
+      <!-- タイトル -->
+      <h1 class="item item1">支払いゲーム</h1>
+
+      <!-- 小計、支払い、お釣りの情報 -->
+      <section
+        class="subtotal-payment-change-wrapper item item2"
+        id="subtotal-wrapper"
+      >
+        <div class="subtotal">小計: <span id="amount"></span>円</div>
+        <div class="payment">支払い: <span id="totalInTray"></span>円</div>
+        <div class="change">お釣り: <span id="change-amount"></span></div>
+      </section>
+
+      <!-- タイマー -->
+      <section id="status-wrapper" class="item item3">
+        <span id="time">60</span>
+      </section>
+
+      <!-- ゲームスタートボタン -->
+      <button id="startButton" class="item item4" onclick="toggleGame()">
+        Game Start
+      </button>
+
+      <!-- トレイ（お金を一時的に置く場所） -->
+      <section id="tray" class="item item5">
+        <div class="coin-in-tray" id="trayCoin1" onclick="moveBackToWallet(1)">
+          <span class="count-in-tray">0</span>
+        </div>
+        <div class="coin-in-tray" id="trayCoin5" onclick="moveBackToWallet(5)">
+          <span class="count-in-tray">0</span>
+        </div>
+        <div
+          class="coin-in-tray"
+          id="trayCoin10"
+          onclick="moveBackToWallet(10)"
+        >
+          <span class="count-in-tray">0</span>
+        </div>
+        <div
+          class="coin-in-tray"
+          id="trayCoin50"
+          onclick="moveBackToWallet(50)"
+        >
+          <span class="count-in-tray">0</span>
+        </div>
+        <div
+          class="coin-in-tray"
+          id="trayCoin100"
+          onclick="moveBackToWallet(100)"
+        >
+          <span class="count-in-tray">0</span>
+        </div>
+        <div
+          class="coin-in-tray"
+          id="trayCoin500"
+          onclick="moveBackToWallet(500)"
+        >
+          <span class="count-in-tray">0</span>
+        </div>
+        <div
+          class="coin-in-tray"
+          id="trayCoin1000"
+          onclick="moveBackToWallet(1000)"
+        >
+          <span class="count-in-tray">0</span>
+        </div>
+      </section>
+
+      <!-- 所持しているコイン -->
+      <section id="coins-area" class="item item6">
+        <div class="coin" id="coin1" onclick="moveToTray(1)">
+          <span class="count">4</span>
+        </div>
+        <div class="coin" id="coin5" onclick="moveToTray(5)">
+          <span class="count">1</span>
+        </div>
+        <div class="coin" id="coin10" onclick="moveToTray(10)">
+          <span class="count">4</span>
+        </div>
+        <div class="coin" id="coin50" onclick="moveToTray(50)">
+          <span class="count">1</span>
+        </div>
+        <div class="coin" id="coin100" onclick="moveToTray(100)">
+          <span class="count">4</span>
+        </div>
+        <div class="coin" id="coin500" onclick="moveToTray(500)">
+          <span class="count">1</span>
+        </div>
+        <div class="coin" id="coin1000" onclick="moveToTray(1000)">
+          <span class="count"></span>
+        </div>
+      </section>
+
+      <!-- 支払いボタン -->
+      <div id="payment-button-container" class="item item7">
+        <section id="payment">
+          <button onclick="pay()" disabled>Pay</button>
+        </section>
+      </div>
+    </main>
+
+    <!-- スコア表示用のモーダル -->
+    <div id="scoreModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">X</span>
+        <div class="score-rank-section">
+          <div class="score-section">
+            <span class="score-label">Score:</span>
+            <span id="score"></span>
+          </div>
+          <div class="rank-section">
+            <span class="rank-label">Rank:</span>
+            <span id="rank"></span>
+          </div>
+        </div>
+        <button id="detailsButton" onclick="toggleDetails()">詳細</button>
+        <div id="details-section" style="display: none">
+          <p>支払った硬貨と紙幣の枚数: <span id="totalPaidCoins"></span></p>
+          <p>
+            支払われた硬貨と紙幣の枚数:
+            <span id="totalChangeCoins"></span>
+          </p>
+          <p>支払いが適用された回数: <span id="numberOfPayments"></span></p>
+          <p>支払いが不足した回数: <span id="numberOfAlerts"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ゲーム停止用のモーダル -->
+    <div id="stopModal" class="stop-modal">
+      <div class="stop-modal-content">
+        <h1>Game Stopped</h1>
+        <button id="stop-close" onclick="closeStopModal()">X</button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
